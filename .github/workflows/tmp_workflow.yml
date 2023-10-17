@@ -1,0 +1,36 @@
+on:
+  push:
+    branches:
+      - "*"
+  workflow_dispatch:
+    inputs:
+      tmp_number:
+        description: "Enter number"
+        required: true
+        type: number
+        default: 1
+
+env:
+  FORCE_COLOR: "1"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ inputs.sha }}
+
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.8
+
+    - name: Run python script
+      env:
+        ENV_NUM: ${{ inputs.branch_name }}
+      run: |
+        echo num=$ENV_NUM
+        python tmp.py
+        
