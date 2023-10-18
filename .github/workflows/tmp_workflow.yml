@@ -1,9 +1,15 @@
 on:
   workflow_dispatch:
+    inputs:
+      tmp_number:
+        description: "Enter number for dispatch"
+        required: true
+        type: number
+        default: 1
   workflow_call:
     inputs:
       tmp_number:
-        description: "Enter number"
+        description: "Enter number for call"
         required: true
         type: number
         default: 1
@@ -15,6 +21,14 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+    
+    - name: Validate input
+      run: |
+        if [[ "${{ inputs.tmp_number }}" < 1 ]]; then
+          echo "Number of instances cannot be less than 1"
+          exit 1
+        fi
+
 
     - uses: actions/checkout@v3
       with:
