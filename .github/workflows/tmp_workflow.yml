@@ -1,11 +1,5 @@
 on:
   workflow_dispatch:
-    inputs:
-      tmp_number:
-        description: "Enter number for dispatch"
-        required: true
-        type: number
-        default: 1
   workflow_call:
     inputs:
       tmp_number:
