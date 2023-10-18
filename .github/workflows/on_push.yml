@@ -1,0 +1,14 @@
+on:
+  push:
+    branches:
+      - "*"
+
+env:
+  FORCE_COLOR: "1"
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/tmp_workflow.yml
+    with:
+      tmp_number: 1
+    secrets: inherit
